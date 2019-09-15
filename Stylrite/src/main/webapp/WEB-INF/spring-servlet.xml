@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans		 xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:mvc="http://www.springframework.org/schema/mvc" 
+			 xmlns:aop="http://www.springframework.org/schema/aop"
+			 xmlns:tx="http://www.springframework.org/schema/tx"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
+			        http://www.springframework.org/schema/beans/spring-beans.xsd
+			        http://www.springframework.org/schema/context
+			        http://www.springframework.org/schema/context/spring-context.xsd
+			        http://www.springframework.org/schema/mvc
+			        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			        http://www.springframework.org/schema/aop	
+			        http://www.springframework.org/schema/aop/spring-aop.xsd
+				 	http://www.springframework.org/schema/tx	
+				 	http://www.springframework.org/schema/tx/spring-tx.xsd">
+			
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/db-config.properties</value>
+            </list> 
+        </property>
+    </bean>
+    
+	<context:annotation-config></context:annotation-config>	
+	<context:component-scan base-package="com.session.controller, com.session.pojo,com.emploee.service.impl, com.employee.controller,
+	 com.employee.dao, com.employee.dao.impl,com.employee.pojo, com.employee.service, com.legend.controller,com.legend.dao,
+	 com.legend.dao.Impl,com.legend.pojo,com.legend.service,com.legend.service.Impl,com.crm.controller, com.crm.dao, 
+	 com.crm.dao.Impl, com.crm.pojo, com.crm.service, com.crm.service.Impl, com.order.Controller, com.order.dao, com.order.dao.Impl, com.order.pojo,
+	 com.order.service, com.order.service.Impl, com.product.controller, com.product.dao, com.product.dao.Impl, com.product.pojo, com.product.service, 
+	 com.product.service.Impl, com.stock.controller,com.stock.dao,com.stock.dao.Impl,com.stock.pojo,com.stock.service,com.stock.service.Impl, 
+	 com.sample.pojo, com.requisition.controller,com.requisition.dao,com.requisition.dao.Impl,com.requisition.pojo,
+	 com.requisition.service,com.requisition.service.Impl, com.barcode.controller, com.barcode.dao, com.barcode.dao.Impl, 
+	 com.barcode.pojo, com.barcode.service, com.barcode.service.Impl, com.purchase.dao,com.purchase.dao.Impl,com.purchase.pojo,
+	 com.purchase.service,com.purchase.service.Impl, com.audit.controller,com.audit.dao,com.audit.dao.Impl,com.audit.pojo,
+	 com.audit.service,com.audit.service.Impl, com.purchase.controller,
+	 com.sample.controller,com.sample.dao,com.sample.dao.Impl,com.sample.service,com.sample.service.Impl,
+	 com.npdProduct.Controller,com.npdProduct.dao,com.npdProduct.daoImpl,com.npdProduct.Service,com.npdProduct.ServiceIpml,
+	 com.returnData.controller,com.returnData.dao,com.returnData.dao.Impl,com.returnData.service,com.returnData.service.Impl">
+	 </context:component-scan>
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
+		
+ 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	 
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="prefix" value="/WEB-INF/JSPs/"></property>  
+        <property name="suffix" value=".jsp"></property>       
+     </bean>
+     
+	<!--stylrite_general Database Configurations -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver.className}" />
+			<property name="url" value="${jdbc.url}"/>
+			<property name="username" value="${jdbc.username}"/>
+			<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!--/stylrite_general Database Configurations/ -->
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">        
+     <property name="packagesToScan">
+          <array>
+           <value>com.employee.pojo</value>
+           <value>com.crm.pojo</value> 
+         </array>
+     </property>    
+	
+<!-- 	<mvc:annotation-driven></mvc:annotation-driven>
+ -->   
+     <property name="dataSource" ref="dataSource" />
+     <property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	</property>
+	<property name="persistenceUnitName" value="stylriteGeneral" />
+     <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.formate_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManagerGeneral" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManagerGeneral" />
+	
+	<!--stylrite_legend Database Configurations -->
+	<bean id="dataSourceLegend" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver.className}" />
+			<property name="url" value="${jdbc.url.legend}"/>
+			<property name="username" value="${jdbc.username}"/>
+			<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!--/stylrite_legend Database Configurations/ -->
+	
+	<bean id="entityManagerFactoryLegend" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">        
+     <property name="packagesToScan">
+          <array>
+           <value>com.legend.pojo</value>
+         </array>
+     </property>       
+     <property name="dataSource" ref="dataSourceLegend" />
+     <property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	</property>
+	<property name="persistenceUnitName" value="stylriteLegend" />
+     <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.formate_sql">true</prop>
+			</props>
+		</property>
+	</bean> 
+	
+	<bean id="transactionManagerLegend" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryLegend"></property>
+	</bean>
+    
+     <tx:annotation-driven transaction-manager="transactionManagerLegend" />
+    
+	
+	<!--stylrite_inventory Database Configurations -->
+	<bean id="dataSourceInventory" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver.className}" />
+			<property name="url" value="${jdbc.url.inventory}"/>
+			<property name="username" value="${jdbc.username}"/>
+			<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!--/stylrite_inventory Database Configurations/ -->	
+	<bean id="entityManagerFactoryInventory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">        
+	     <property name="packagesToScan">
+	         <array>
+           		<value>com.product.pojo</value> 
+           		<value>com.npdProduct.pojo</value> 
+           		<value>com.sample.pojo</value> 
+           		<value>com.stock.pojo</value>    
+           		<value>com.requisition.pojo</value>    
+           		<value>com.barcode.pojo</value>              		  
+           		<value>com.purchase.pojo</value>    		           		        		
+           		<value>com.audit.pojo</value>
+	         </array>
+	     </property>       
+	     <property name="dataSource" ref="dataSourceInventory" />
+	     <property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+		</property>
+		<property name="persistenceUnitName" value="stylriteInventory" />
+	     <property name="jpaProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.formate_sql">true</prop>
+				</props>
+			</property>
+	</bean>	
+	<bean id="transactionManagerInventory" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryInventory"></property>
+	</bean>
+    <tx:annotation-driven transaction-manager="transactionManagerInventory" />
+     
+ 	<!--stylrite_sales Sales Configurations -->
+	<bean id="dataSourceSales" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver.className}" />
+			<property name="url" value="${jdbc.url.sales}"/>
+			<property name="username" value="${jdbc.username}"/>
+			<property name="password" value="${jdbc.password}" />
+	</bean>
+	 <!--/ stylrite_sales Sales Configurations -->
+	 
+	<bean id="entityManagerFactorySales" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">        
+     <property name="packagesToScan">
+          <array>
+           <value>com.stock.pojo</value>
+           <value>com.product.pojo</value>
+           <value>com.order.pojo</value>  
+           <value>com.returnData.pojo</value>  
+         </array>
+     </property>       
+     <property name="dataSource" ref="dataSourceSales" />
+     <property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	</property>
+	<property name="persistenceUnitName" value="stylriteSales" />
+     <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.formate_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManagerSales" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactorySales"></property>
+	</bean>
+	 <tx:annotation-driven transaction-manager="transactionManagerSales" />
+    
+	<tx:annotation-driven proxy-target-class="true" />
+	
+</beans>

@@ -1,0 +1,145 @@
+label{
+	font-size: 13px	!important;
+	margin-bottom: 0px !important;
+}
+td, th{
+	font-size: 13px	!important;	
+}
+ table {
+    border-collapse: collapse;
+}
+/*table,  {
+   border: 0.1px dotted grey !important;
+   padding: 7px;
+   text-align: left;
+}
+th{
+	background: #87ceeb	!important;
+}*/
+table {  
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top-color: black;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-left-color: black;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-right-color: black;
+    border-right-width: 1px;
+    border-right-style: solid;
+} 
+th{
+	padding: 7px;
+	background: #cedefd;
+}
+td ,th{
+    border-collapse: collapse; 
+    border-spacing: 0;
+    border-right-color: #c0c0c0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-bottom-color: #c0c0c0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 7px;
+   	text-align: left;
+}
+/* #address label{
+	font-size: 25px	!important;
+} */
+/* img{
+	max-width: 40%	!important;
+}
+#qIDDiv label{
+	text-align: center;
+}
+
+.address{
+    padding-left: 12%;
+}
+#pimg{
+	text-align:center	!important;
+	width: 10%	!important;
+}
+table td{
+	padding-top:0px !important;
+	padding-bottom:0px !important; 
+	padding-left:10px !important;
+	border-bottom: 1px solid #000000 !important;
+}
+td.right {
+	text-align: right !important;	
+	padding-right:10px !important;	
+}
+td.left {
+	text-align: left	!important;
+	padding-left:10px !important;
+}
+td.center {
+	text-align: center !important;	
+}
+th{
+	font-weight: 600 !important;
+	border: 1px solid #000000 !important;
+	padding-top:5px !important;
+	padding-bottom:5px !important; 
+	padding-left:10px !important;
+	background: #87ceeb	!important;
+}
+
+
+table {
+    
+}
+
+
+hr{
+	margin:0px !important;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #000000 !important;
+}
+.row #address2{
+	display: none	!important;
+}
+
+.left{
+	text-align: left	!important;
+	padding-left:10px !important;
+}
+.right {
+	text-align: right !important;	
+	padding-right:10px !important;	
+}
+
+table { to produce the dots via radial gradient
+  background-image: radial-gradient(circle at 50% 50%, black 1px, transparent 2px);
+  background-size: 8px 50px; size in y-axis is equal to td height + padding top + padding bottom
+  background-position: 2px -27px; position in y-axis is -1 * size/2 - 2px
+  background-repeat: round; makes dots repeat in round manner
+  border-collapse: collapse;
+}
+td {
+  vertical-align: bottom;
+  height: 20px; 
+  padding: 2px;
+}
+tr:nth-child(even) {
+  background-image: linear-gradient(#eee, #eee);
+  background-size: 100% 46px; size in y-axis is height of td
+  background-repeat: no-repeat;
+}
+tr:nth-child(even) td:nth-child(even) {
+  background-image: linear-gradient(#e2e2e2, #e2e2e2);
+  background-size: 100% 46px;
+  background-repeat: no-repeat;
+}
+tr:nth-child(odd) td:nth-child(even) {
+  background-image: linear-gradient(#eaeaea, #eaeaea);
+  background-size: 100% 46px;
+  background-repeat: no-repeat;
+} */
